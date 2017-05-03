@@ -1,12 +1,14 @@
 require_relative 'mixins'
+require_relative 'deck'
+require_relative 'player'
 
 class Main
   include Mixins
 
   def greetings_menu
     greetings_menu_options
-    player = gets.chomp.to_s
-    puts "\nHello #{player}!"
+    @player = gets.chomp.to_s
+    puts "\nHello #{@player}!"
     start_menu
   end
 
@@ -17,6 +19,11 @@ class Main
   end
 
   def start_game
+    player = Player.new(@player)
+    dealer = Player.new("Dealer")
+
+    deck = Deck.new
+
     puts "Start game"
   end
 
