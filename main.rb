@@ -19,11 +19,11 @@ class Main
   end
 
   def start_game
+    # Creating players
     player = Player.new(@player)
     dealer = Player.new("Dealer")
-
+    # Deck initialization
     deck = Deck.new
-
     puts "Start game"
   end
 
