@@ -29,11 +29,58 @@ class Main
   end
 
   def first_hand(game)
+    game.player.remove_cards
+    game.dealer.remove_cards
     game.first_hand
     bank_status(game)
     2.times { game.player.get_card(game.deck) }
     2.times { game.dealer.get_card(game.deck) }
     first_hand_status(game)
+    next_hand(game)
+  end
+
+  def next_hand(game)
+    next_hand_options
+    option = gets.chomp.to_i
+    case option
+      when 1
+        hit(game)
+      when 2
+        stand(game)
+      when 9
+        exit
+      else
+        next_hand(game)
+    end
+  end
+
+  def hit(game)
+    game.player.get_card(game.deck)
+    player_status(game)
+    game.player.get_score < 21 ? next_hand(game) : dealer_move(game)
+  end
+
+  def stand(game)
+    player_status(game)
+    dealer_move(game)
+  end
+
+  def dealer_move(game)
+    dealer_status(game)
+    dealer_score = game.dealer.get_score
+    if dealer_score < 17
+      game.dealer.get_card(game.deck)
+      dealer_move(game)
+    else
+      game_status(game)
+    end
+  end
+
+  def game_status(game)
+    player_score = game.player.get_score
+    dealer_score = game.dealer.get_score
+    player_status(game)
+    dealer_status(game)
   end
 end
 

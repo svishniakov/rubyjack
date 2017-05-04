@@ -18,6 +18,7 @@ class Player
   end
 
   def get_score
+    @score = 0
     @player_cards.each do |card|
       card_value = card.split(' ')
       @score += card_value[0].to_i unless %w(J Q K A).include?(card_value[0])

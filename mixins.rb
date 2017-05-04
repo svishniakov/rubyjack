@@ -26,15 +26,35 @@ module Mixins
   end
 
   def bank_status(game)
-    puts "Total bank: #{game.bank}"
+    puts s = "\nTotal bank: #{game.bank}"
+    puts "-" * s.size
+  end
+
+  def player_status(game)
+    puts "-" * 15
+    puts "#{game.player.name} cards:"
+    game.player.player_cards.each { |card| print card}
+    puts " - score: #{game.player.get_score}"
+  end
+
+  def dealer_status(game)
+    puts "-" * 15
+    puts "Dealer cards:"
+    game.dealer.player_cards.each { |card| print card}
+    puts " - score: #{game.dealer.get_score}"
   end
 
   def first_hand_status(game)
-    puts "#{game.player.name} cards:"
-    puts "#{game.player.player_cards}"
-    puts "#{game.player.get_score}"
-    puts "Dealer cards:"
-    puts "#{game.dealer.player_cards}"
-    puts "#{game.dealer.get_score}"
+    player_status(game)
+    puts "\nDealer cards:"
+    puts "* #{game.dealer.player_cards.last}"
+    puts "-" * 15
   end
+
+  def next_hand_options
+    puts "Your move!"
+    puts "1 - Hit, 2 - Stand, 9 - to stop the game"
+  end
+
+
 end
