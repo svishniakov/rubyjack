@@ -18,7 +18,7 @@ module Mixins
   end
 
   def opponents(player, dealer)
-    puts "------------"
+    puts "-" * 15
     puts "Opponents:"
     puts "#{player.name} - #{player.balance}"
     puts string = "#{dealer.name} - #{dealer.balance}"
@@ -26,8 +26,8 @@ module Mixins
   end
 
   def bank_status(game)
-    puts s = "\nTotal bank: #{game.bank}"
-    puts "-" * s.size
+    puts "\nTotal bank: #{game.bank}"
+    puts "-" * 15
   end
 
   def player_status(game)
@@ -35,6 +35,7 @@ module Mixins
     puts "#{game.player.name} cards:"
     game.player.player_cards.each { |card| print card}
     puts " - score: #{game.player.get_score}"
+    puts "-" * 15
   end
 
   def dealer_status(game)
@@ -42,6 +43,7 @@ module Mixins
     puts "Dealer cards:"
     game.dealer.player_cards.each { |card| print card}
     puts " - score: #{game.dealer.get_score}"
+    puts "-" * 15
   end
 
   def first_hand_status(game)
@@ -54,7 +56,6 @@ module Mixins
   def next_hand_options
     puts "Your move!"
     puts "1 - Hit, 2 - Stand, 9 - to stop the game"
+    puts "-" * 15
   end
-
-
 end
