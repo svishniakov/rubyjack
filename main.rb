@@ -33,9 +33,7 @@ class Main
     bank_status(game)
     2.times { game.player.get_card(game.deck) }
     2.times { game.dealer.get_card(game.deck) }
-
-    puts "#{game.player.name} cards: #{game.player.player_cards}"
-    puts "Dealer cards: #{game.dealer.player_cards}"
+    first_hand_status(game)
   end
 end
 

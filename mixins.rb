@@ -28,4 +28,13 @@ module Mixins
   def bank_status(game)
     puts "Total bank: #{game.bank}"
   end
+
+  def first_hand_status(game)
+    puts "#{game.player.name} cards:"
+    puts "#{game.player.player_cards}"
+    puts "#{game.player.get_score}"
+    puts "Dealer cards:"
+    puts "#{game.dealer.player_cards}"
+    puts "#{game.dealer.get_score}"
+  end
 end
