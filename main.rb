@@ -1,6 +1,7 @@
 require_relative 'mixins'
 require_relative 'deck'
 require_relative 'player'
+require_relative 'game'
 
 class Main
   include Mixins
@@ -19,16 +20,22 @@ class Main
   end
 
   def start_game
-    # Creating players
     player = Player.new(@player)
     dealer = Player.new("Dealer")
-    # Deck initialization
     deck = Deck.new
-    puts "Start game"
+    game = Game.new(player, dealer, deck)
+    opponents(player, dealer)
+    first_hand(game)
   end
 
-  def restart_game
-    puts "Restart game"
+  def first_hand(game)
+    game.first_hand
+    bank_status(game)
+    2.times { game.player.get_card(game.deck) }
+    2.times { game.dealer.get_card(game.deck) }
+
+    puts "#{game.player.name} cards: #{game.player.player_cards}"
+    puts "Dealer cards: #{game.dealer.player_cards}"
   end
 end
 

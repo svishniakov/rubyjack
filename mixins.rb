@@ -16,4 +16,16 @@ module Mixins
   def wrong_option
     puts '--- Wrong option was selected ---'
   end
+
+  def opponents(player, dealer)
+    puts "------------"
+    puts "Opponents:"
+    puts "#{player.name} - #{player.balance}"
+    puts string = "#{dealer.name} - #{dealer.balance}"
+    puts "-" * string.size
+  end
+
+  def bank_status(game)
+    puts "Total bank: #{game.bank}"
+  end
 end
