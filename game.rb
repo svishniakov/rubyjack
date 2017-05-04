@@ -10,7 +10,5 @@ class Game
 
   def first_hand
     @bank = 20
-    @player.balance -= 10
-    @dealer.balance -= 10
   end
 end

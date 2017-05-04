@@ -48,7 +48,7 @@ module Mixins
 
   def first_hand_status(game)
     player_status(game)
-    puts "\nDealer cards:"
+    puts "Dealer cards:"
     puts "* #{game.dealer.player_cards.last}"
     puts "-" * 15
   end
@@ -57,5 +57,14 @@ module Mixins
     puts "Your move!"
     puts "1 - Hit, 2 - Stand, 9 - to stop the game"
     puts "-" * 15
+  end
+
+  def game_status(game, message)
+    player = game.player
+    dealer = game.dealer
+    puts frame = "********** #{message} **********"
+    puts "#{player.name}'s score: #{player.get_score}, total balance: #{player.balance}"
+    puts "Dealer's score: #{dealer.get_score}, total balance: #{dealer.balance}"
+    puts "*" * frame.size
   end
 end

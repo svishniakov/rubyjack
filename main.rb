@@ -31,6 +31,8 @@ class Main
   def first_hand(game)
     game.player.remove_cards
     game.dealer.remove_cards
+    game.player.bet
+    game.dealer.bet
     game.first_hand
     bank_status(game)
     2.times { game.player.get_card(game.deck) }
@@ -72,15 +74,48 @@ class Main
       game.dealer.get_card(game.deck)
       dealer_move(game)
     else
-      game_status(game)
+      game_final(game)
     end
   end
 
-  def game_status(game)
+  def game_final(game)
     player_score = game.player.get_score
     dealer_score = game.dealer.get_score
-    player_status(game)
-    dealer_status(game)
+    if player_score <= 21 && player_score > dealer_score
+      player_won(game)
+    elsif dealer_score <= 21 && dealer_score > player_score
+      dealer_won(game)
+    elsif player_score > 21
+      dealer_won(game)
+    elsif player_score = dealer_score
+      draw(game)
+    end
+  end
+
+  def player_won(game)
+    game.player.balance += game.bank
+    game.bank = 0
+    game_status(game, "#{game.player.name} won!")
+    sleep(2)
+    first_hand(game)
+  end
+
+  def dealer_won(game)
+    game.dealer.balance += game.bank
+    game.bank = 0
+    game_status(game, "Dealer won!")
+    sleep(2)
+    first_hand(game)
+  end
+
+  def draw(game)
+    half_bank = game.bank
+    game.bank = 0
+    game.player.balance += half_bank
+    game.dealer.balance += half_bank
+    game_status(game, "Draw!")
+    sleep(2)
+    first_hand(game)
   end
 end
 

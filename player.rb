@@ -17,6 +17,10 @@ class Player
     @player_cards = []
   end
 
+  def bet
+    @balance -= 10
+  end
+
   def get_score
     @score = 0
     @player_cards.each do |card|
